@@ -1,0 +1,21 @@
+version: '2'
+services:
+  bundler:
+    container_name: bundler
+    image: nginx:1.20.0-alpine
+    ports:
+    - "8080:80"
+    volumes:
+    - ./bundles:/usr/share/nginx/html/bundles
+  opa:
+    container_name: opa
+    image: openpolicyagent/opa:0.35.0-rootless
+    volumes:
+    - ./opa/config.yml:/config.yml
+    ports:
+    - "8181:8181"
+    command:
+    - "run"
+    - "--server"
+    - "--config-file=/config.yml"
+    - "--log-format=json-pretty"
