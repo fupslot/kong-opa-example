@@ -6,6 +6,10 @@ This responsitory contains a simple example how to integrate [Kong](https://kong
 
     TODO: describe why there is a need to use OPA and how it helps solve problems in the modern microservice architecture
 
+In the era where cloud applications and microservice architecture are dominating the software engineering world, it is important to stay up-to-date with the modern trends.
+
+[Kong](https://konghq.com/) is Cloud-Native API Gateway. [CNCF silver member](https://landscape.cncf.io/?selected=kong&zoom=150). [OPA](https://www.openpolicyagent.org/) is General-Purpose Policy Engine. [CNCF Graduated Project](https://landscape.cncf.io/?selected=open-policy-agent-opa&zoom=150)
+
 ## Example
 
     TODO: add graphic schema how the integration works and step by step instruction/docker + docker compose
@@ -23,6 +27,10 @@ The policy in this example does the following:
 
 For this policy to work properly it must have an access to a list of user permissions that, in the `real-world` would come from a database or a configuration file. In this example we distribute that data in a `data.json` file inside a bundle along with a policy file. For other options refer to [OPA docs](https://www.openpolicyagent.org/docs/latest/external-data/)
 
+## Prerequisites
+
+
+
 ### Create Bundle File
 
 Before starting OPA server we need to create a bundle file. Just run the command:
@@ -32,6 +40,10 @@ make bundle
 ```
 
 It should create `authz.tar.gz` file and place it in `./bundles` folder where it will loaded from by the `bundler` service.
+
+### Start
+
+Run following command 
 
 ## How It Works
 

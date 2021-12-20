@@ -1,0 +1,12 @@
+_format_version: "2.1"
+
+services:
+- name: docs.microservice
+  url: http://docs:3000
+  routes:
+  - name: docs
+    methods:
+    - POST
+    strip_path: false
+    paths:
+      - /documents/*

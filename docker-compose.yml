@@ -19,3 +19,32 @@ services:
     - "--server"
     - "--config-file=/config.yml"
     - "--log-format=json-pretty"
+    depends_on:
+      - bundler
+  kong:
+    container_name: kong
+    image: kong/kong-gateway:2.6.0.2-alpine
+    volumes:
+      - ./kong/config.yml:/usr/local/kong/declarative-config/config.yml
+    environment:
+      - KONG_DATABASE=off
+      - KONG_DECLARATIVE_CONFIG=/usr/local/kong/declarative-config/config.yml
+      - KONG_PROXY_ACCESS_LOG=/dev/stdout
+      - KONG_PROXY_ERROR_LOG=/dev/stderr
+    ports:
+    - "8000:8000"
+    - "8001:8001"
+    depends_on:
+    - docs
+  docs:
+    container_name: docs.microservice
+    init: true
+    build:
+      context: ./docs.microservice
+      dockerfile: ./Dockerfile
+    volumes:
+      - /app/node_modules
+      - ./docs.microservice:/app
+    command:
+    - ./node_modules/.bin/nodemon
+    - index.js
