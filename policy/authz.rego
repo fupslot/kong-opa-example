@@ -4,7 +4,7 @@ package authz
 default allow = false
 default anonymus = false
 
-import input.attributes.request
+import input.request
 
 action(method) = "read"   { method == "GET" }
 action(method) = "create" { method == "POST" }
