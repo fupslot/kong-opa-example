@@ -9,4 +9,12 @@ services:
     - POST
     strip_path: false
     paths:
-      - /documents/*
+    - /documents/*
+    plugins:
+    - name: opa-pass
+      config:
+        server:
+          url: http://opa:8181/v1/data/authz/allow
+        request:
+          always_pass_forward: false
+          body: false

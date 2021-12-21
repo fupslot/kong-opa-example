@@ -26,11 +26,14 @@ services:
     image: kong/kong-gateway:2.6.0.2-alpine
     volumes:
       - ./kong/config.yml:/usr/local/kong/declarative-config/config.yml
+      - ../kong-opa-pass/src/kong/plugins:/usr/local/kong/plugins
     environment:
       - KONG_DATABASE=off
       - KONG_DECLARATIVE_CONFIG=/usr/local/kong/declarative-config/config.yml
       - KONG_PROXY_ACCESS_LOG=/dev/stdout
       - KONG_PROXY_ERROR_LOG=/dev/stderr
+      - KONG_LUA_PACKAGE_PATH=/usr/local/?.lua
+      - KONG_PLUGINS=opa-pass
     ports:
     - "8000:8000"
     - "8001:8001"
